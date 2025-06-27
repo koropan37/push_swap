@@ -6,11 +6,11 @@
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 18:41:57 by skimura           #+#    #+#             */
-/*   Updated: 2025/05/26 17:11:22 by skimura          ###   ########.fr       */
+/*   Updated: 2025/06/27 15:39:14 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 static int	ft_printcheck(const char **format, va_list args)
 {

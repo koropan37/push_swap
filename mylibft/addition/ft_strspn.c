@@ -1,29 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_ra_rb_rr.c                                      :+:      :+:    :+:   */
+/*   ft_strspn.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/11 18:19:02 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/13 16:10:37 by skimura          ###   ########.fr       */
+/*   Created: 2025/06/01 18:55:11 by skimura           #+#    #+#             */
+/*   Updated: 2025/06/02 20:11:52 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ra(t_stack *a)
+size_t	ft_strspn(const char *s, const char *accept)
 {
-	rotate(a);
+	size_t	j;
+	size_t	i;
+	int		f;
+
+	i = 0;
+	while (s[i])
+	{
+		j = 0;
+		f = 0;
+		while (accept[j])
+		{
+			if (s[i] == accept[j])
+				f = 1;
+			j++;
+		}
+		if (f == 0)
+			return (i);
+		i++;
+	}
+	return (i);
 }
 
-void	rb(t_stack *b)
-{
-	rotate(b);
-}
+// int	main(void)
+// {
+// 	const char	*s = "hello";
+// 	const char	*accept = "jfkhpell";
 
-void	rr(t_stack *a, t_stack *b)
-{
-	rotate(a);
-	rotate(b);
-}
+// 	printf("%zu\n", ft_strspn(s, accept));
+// }

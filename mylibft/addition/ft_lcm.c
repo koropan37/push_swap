@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_lcm.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/04 19:26:15 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/27 11:37:11 by skimura          ###   ########.fr       */
+/*   Created: 2025/06/05 19:41:36 by skimura           #+#    #+#             */
+/*   Updated: 2025/06/05 19:43:21 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 256
-# endif
-# ifndef FD_MAX
-#  define FD_MAX 1024
-# endif
-
-# include <stddef.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-char	*get_next_line(int fd);
-int		ft_check_nl(const char *s);
-char	*ft_strjoin_free(char *old, const char *buffer);
-
-#endif
+unsigned int	ft_lcm(unsigned int a, unsigned int b)
+{
+	if (a == 0 || b == 0)
+		return (0);
+	return (a / ft_gcd(a, b) * b);
+}

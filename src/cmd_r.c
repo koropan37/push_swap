@@ -1,42 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcspn.c                                       :+:      :+:    :+:   */
+/*   cmd_r.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/01 20:02:27 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/01 20:20:09 by skimura          ###   ########.fr       */
+/*   Created: 2025/06/11 18:19:02 by skimura           #+#    #+#             */
+/*   Updated: 2025/06/27 17:26:49 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "include/push_swap.h"
 
-size_t	ft_strcspn(const char *s, const char *reject)
+void	ra(t_stack *a)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (s[i])
-	{
-		j = 0;
-		while (reject[j])
-		{
-			if (s[i] == reject[j])
-				return (i);
-			j++;
-		}
-		i++;
-	}
-	return (i);
+	if (!a)
+		return ;
+	rotate(a);
+	ft_printf("ra\n");
 }
 
-// int	main(void)
-// {
-// 	const char	*s = "hallo , world";
-// 	const char	*reject = "ol";
+void	rb(t_stack *b)
+{
+	if (!b)
+		return ;
+	rotate(b);
+	ft_printf("rb\n");
+}
 
-// 	printf("%zu\n", ft_strcspn(s, reject));
-// 	return (0);
-// }
+void	rr(t_stack *a, t_stack *b)
+{
+	if (!a || !b)
+		return ;
+	rotate(a);
+	rotate(b);
+	ft_printf("rr\n");
+}

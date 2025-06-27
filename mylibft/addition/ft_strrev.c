@@ -1,23 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_p_comand.c                                      :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/11 18:08:40 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/13 20:39:43 by skimura          ###   ########.fr       */
+/*   Created: 2025/06/02 18:23:26 by skimura           #+#    #+#             */
+/*   Updated: 2025/06/02 20:11:44 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	pa(t_stack *a, t_stack *b)
+char	*ft_strrev(char *str)
 {
-	ft_push(b, a);
+	int		i;
+	int		len;
+	char	tmp;
+
+	i = 0;
+	len = ft_strlen(str);
+	while (i < len - 1)
+	{
+		tmp = str[i];
+		str[i] = str[len - 1];
+		str[len - 1] = tmp;
+		i++;
+		len--;
+	}
+	return (str);
 }
 
-void	pb(t_stack *a, t_stack *b)
-{
-	ft_push(a, b);
-}
+// int	main(void)
+// {
+// 	char	s[] = "hello";
+
+// 	ft_strrev(s);
+// 	printf("%s\n", s);
+// 	return (0);
+// }

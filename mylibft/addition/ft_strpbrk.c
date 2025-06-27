@@ -1,33 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_main.c                                   :+:      :+:    :+:   */
+/*   ft_strpbrk.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 15:46:30 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/13 18:05:58 by skimura          ###   ########.fr       */
+/*   Created: 2025/06/02 17:46:12 by skimura           #+#    #+#             */
+/*   Updated: 2025/06/04 21:22:38 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "push_swap.h"
 
-
-char *push_swap_checker(char c)
+char	*ft_strpbrk(const char *s1, const char *s2)
 {
-	int n;
+	int	i;
+	int	j;
 
-
-}
-
-int main(int ac, char **av)
-{
-	int i = 0;
-	if(ac < 2)
-	return(ft_printf("error\n"), 0);
-	if(ac >= 2)
+	i = 0;
+	j = 0;
+	while (s1[i])
 	{
-
+		j = 0;
+		while (s2[j])
+		{
+			if (s1[i] == s2[j])
+				return ((char *)&s1[i]);
+			j++;
+		}
+		i++;
 	}
+	return (NULL);
 }
+
+// int	main(void)
+// {
+// 	const char	*s1 = "hello world";
+// 	const char	*s2 = "aiueo";
+
+// 	printf("%s\n", ft_strpbrk(s1, s2));
+// 	return (0);
+// }

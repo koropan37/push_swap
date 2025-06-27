@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_prime.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/04 19:26:15 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/27 11:37:11 by skimura          ###   ########.fr       */
+/*   Created: 2025/06/11 19:46:31 by skimura           #+#    #+#             */
+/*   Updated: 2025/06/11 19:52:27 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 256
-# endif
-# ifndef FD_MAX
-#  define FD_MAX 1024
-# endif
+int	ft_prime(int n)
+{
+	int	i;
 
-# include <stddef.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-char	*get_next_line(int fd);
-int		ft_check_nl(const char *s);
-char	*ft_strjoin_free(char *old, const char *buffer);
-
-#endif
+	if (n < 2)
+		return (0);
+	i = 2;
+	while (i <= n / i)
+	{
+		if (n % i == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}

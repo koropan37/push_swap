@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_rra_rrb_rrr.c                                   :+:      :+:    :+:   */
+/*   01_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/11 18:25:37 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/13 15:38:34 by skimura          ###   ########.fr       */
+/*   Created: 2025/06/22 22:17:48 by skimura           #+#    #+#             */
+/*   Updated: 2025/06/27 19:43:33 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "include/push_swap.h"
 
-void	rra(t_stack *a)
+void	ft_printerror(void)
 {
-	reverse_rotate(a);
+	write(2, "error\n", 6);
+	exit(1);
 }
 
-void	rrb(t_stack *b)
+int	main(int ac, char **av)
 {
-	reverse_rotate(b);
-}
+	int	*arr;
+	int	size;
 
-void	rrr(t_stack *a, t_stack *b)
-{
-	reverse_rotate(a);
-	reverse_rotate(b);
+	size = 0;
+	if (ac < 2)
+		return (0);
+	arr = ft_parse(ac - 1, av + 1, &size);
+	if (!arr)
+		ft_printerror();
+	solve_push_swap(arr, size);
+	free(arr);
+	return (0);
 }

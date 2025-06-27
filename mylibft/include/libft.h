@@ -6,21 +6,21 @@
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 10:35:26 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/01 21:46:56 by skimura          ###   ########.fr       */
+/*   Updated: 2025/06/18 20:19:49 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include "ft_printf.h"
+# include "get_next_line.h"
 # include <limits.h>
 # include <stddef.h>
 # include <stdint.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
-# include "ft_printf.h"
-# include "get_next_line.h"
 
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
@@ -57,6 +57,24 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
+int					ft_strcmp(char *s1, char *s2);
+char				*ft_strcpy(char *dst, const char *src);
+char				*ft_strpbrk(const char *s1, const char *s2);
+size_t				ft_strcspn(const char *s, const char *reject);
+size_t				ft_strspn(const char *s, const char *accept);
+char				*ft_strrev(char *str);
+int					ft_max(int *tab, unsigned int len);
+int					ft_min(int *tab, unsigned int len);
+void				ft_print_bits(unsigned char octet);
+unsigned char		ft_swap_bits(unsigned char octet);
+unsigned char		ft_reverse_bits(unsigned char octet);
+int					ft_prime(int n);
+unsigned int		ft_gcd(unsigned int a, unsigned int b);
+unsigned int		ft_lcm(unsigned int a, unsigned int b);
+int					ft_abs(int n);
+char				*ft_strndup(const char *s, size_t n);
+char				*ft_strcat(char *dest, const char *src);
+void				*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
 typedef struct s_list
 {

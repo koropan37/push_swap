@@ -6,7 +6,7 @@
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:56:05 by skimura           #+#    #+#             */
-/*   Updated: 2025/05/07 16:42:10 by skimura          ###   ########.fr       */
+/*   Updated: 2025/06/25 21:56:48 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,6 @@ static void	free_all_malloc(char **arr, int n)
 	free(arr);
 }
 
-static int	in_split(char **str, char const *s, char c, size_t word_total);
-
-char	**ft_split(char const *s, char c)
-{
-	size_t	word_total;
-	char	**newstr;
-
-	if (!s)
-		return (NULL);
-	word_total = count_words(s, c);
-	newstr = (char **)malloc(sizeof(char *) * (word_total + 1));
-	if (!newstr)
-		return (NULL);
-	if (!in_split(newstr, s, c, word_total))
-		return (NULL);
-	return (newstr);
-}
-
 static int	in_split(char **str, char const *s, char c, size_t word_total)
 {
 	size_t	word_len;
@@ -105,6 +87,22 @@ static int	in_split(char **str, char const *s, char c, size_t word_total)
 	}
 	str[i] = NULL;
 	return (1);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	size_t	word_total;
+	char	**newstr;
+
+	if (!s)
+		return (NULL);
+	word_total = count_words(s, c);
+	newstr = (char **)malloc(sizeof(char *) * (word_total + 1));
+	if (!newstr)
+		return (NULL);
+	if (!in_split(newstr, s, c, word_total))
+		return (NULL);
+	return (newstr);
 }
 
 // #include <stdio.h>

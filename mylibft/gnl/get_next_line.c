@@ -6,11 +6,12 @@
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 19:26:08 by skimura           #+#    #+#             */
-/*   Updated: 2025/05/19 17:48:36 by skimura          ###   ########.fr       */
+/*   Updated: 2025/06/27 11:37:54 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "libft.h"
 
 static ssize_t	ft_read_buf(int fd, char **buffer)
 {

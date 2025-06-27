@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/04 19:26:15 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/27 11:37:11 by skimura          ###   ########.fr       */
+/*   Created: 2025/06/11 19:38:37 by skimura           #+#    #+#             */
+/*   Updated: 2025/06/18 20:11:43 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 256
-# endif
-# ifndef FD_MAX
-#  define FD_MAX 1024
-# endif
+char	*ft_strcpy(char *dst, const char *src)
+{
+	size_t	i;
 
-# include <stddef.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-char	*get_next_line(int fd);
-int		ft_check_nl(const char *s);
-char	*ft_strjoin_free(char *old, const char *buffer);
-
-#endif
+	if (!dst || !src)
+		return (NULL);
+	i = 0;
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}

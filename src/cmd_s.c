@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   cmd_s.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/31 17:26:45 by skimura           #+#    #+#             */
-/*   Updated: 2025/05/31 17:35:16 by skimura          ###   ########.fr       */
+/*   Created: 2025/06/11 18:31:31 by skimura           #+#    #+#             */
+/*   Updated: 2025/06/27 11:09:51 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "include/push_swap.h"
 
-int	ft_strcmp(char *s1, char *s2)
+void	sa(t_stack *a)
 {
-	int	i;
+	if (!a)
+		return ;
+	swap_top_two(a);
+	ft_printf("sa\n");
+}
 
-	i = 0;
-	while ((s1[i] || s2[i]) && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
+void	sb(t_stack *b)
+{
+	if (!b)
+		return ;
+	swap_top_two(b);
+	ft_printf("sb\n");
+}
+
+void	ss(t_stack *a, t_stack *b)
+{
+	if (!a || !b)
+		return ;
+	swap_top_two(a);
+	swap_top_two(b);
+	ft_printf("ss\n");
 }

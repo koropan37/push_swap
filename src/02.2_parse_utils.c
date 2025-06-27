@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   02.2_parse_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/04 19:26:15 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/27 11:37:11 by skimura          ###   ########.fr       */
+/*   Created: 2025/06/24 22:12:18 by skimura           #+#    #+#             */
+/*   Updated: 2025/06/27 11:08:07 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "include/push_swap.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 256
-# endif
-# ifndef FD_MAX
-#  define FD_MAX 1024
-# endif
+void	free_split(char **block)
+{
+	int	i;
 
-# include <stddef.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+	i = 0;
+	while (block[i])
+		free(block[i++]);
+	free(block);
+}
 
-char	*get_next_line(int fd);
-int		ft_check_nl(const char *s);
-char	*ft_strjoin_free(char *old, const char *buffer);
+int	count_block(char **block)
+{
+	int	count;
 
-#endif
+	count = 0;
+	while (block[count])
+		count++;
+	return (count);
+}

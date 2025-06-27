@@ -1,34 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_list_helper.c                                   :+:      :+:    :+:   */
+/*   04_list.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 16:52:03 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/13 21:46:16 by skimura          ###   ########.fr       */
+/*   Updated: 2025/06/27 19:49:22 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "include/push_swap.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	set_stack_data(t_stack *stack, t_node *dummy);
+int		list_size(t_node *dummy);
+void	free_list(t_node *dummy);
+void	free_stack(t_stack *stack);
+
+t_stack	*build_compressed_stack(int *arr, int size)
 {
-	unsigned char		*d;
-	unsigned const char	*s;
-	size_t				i;
+	t_node	*dummy;
+	t_stack	*stack;
 
-	if ((!dest || !src) && n != 0)
+	if (size <= 0 || !arr)
 		return (NULL);
-	d = (unsigned char *)dest;
-	s = (unsigned const char *)src;
-	i = 0;
-	while (i < n)
+	dummy = create_dlist_from_array(arr, size);
+	if (!dummy)
+		return (NULL);
+	compress_ranking(dummy);
+	stack = malloc(sizeof(t_stack));
+	if (!stack)
 	{
-		d[i] = s[i];
-		i++;
+		free_list(dummy);
+		return (NULL);
 	}
-	return (dest);
+	set_stack_data(stack, dummy);
+	return (stack);
+}
+
+void	set_stack_data(t_stack *stack, t_node *dummy)
+{
+	stack->top = dummy;
+	stack->size = list_size(dummy);
 }
 
 int	list_size(t_node *dummy)
@@ -48,20 +61,6 @@ int	list_size(t_node *dummy)
 	return (count);
 }
 
-void	restore_original_values(t_node *dummy)
-{
-	t_node	*cur;
-
-	if (!dummy)
-		return ;
-	cur = dummy->next;
-	while (cur != dummy)
-	{
-		cur->value = cur->original_value;
-		cur = cur->next;
-	}
-}
-
 void	free_list(t_node *dummy)
 {
 	t_node	*cur;
@@ -79,20 +78,10 @@ void	free_list(t_node *dummy)
 	free(dummy);
 }
 
-void	print_list(t_node *dummy)
+void	free_stack(t_stack *stack)
 {
-	t_node	*cur;
-
-	if (!dummy || dummy->next == dummy)
-	{
-		printf("(empty list)\n");
+	if (!stack)
 		return ;
-	}
-	cur = dummy->next;
-	while (cur != dummy)
-	{
-		printf("%d, ", cur->value);
-		cur = cur->next;
-	}
-	printf("\n");
+	free_list(stack->top);
+	free(stack);
 }

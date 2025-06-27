@@ -1,42 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_utils_r_s.c                                     :+:      :+:    :+:   */
+/*   cmd_rr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/11 18:07:03 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/13 15:38:25 by skimura          ###   ########.fr       */
+/*   Created: 2025/06/11 18:25:37 by skimura           #+#    #+#             */
+/*   Updated: 2025/06/27 17:26:52 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "include/push_swap.h"
 
-void	swap_top_two(t_stack *stack)
+void	rra(t_stack *a)
 {
-	t_node	*first;
-	t_node	*second;
-	int		tmp;
-
-	if (!stack || stack->size < 2)
+	if (!a)
 		return ;
-	first = stack->top;
-	second = first->next;
-	tmp = first->value;
-	first->value = second->value;
-	second->value = tmp;
+	reverse_rotate(a);
+	ft_printf("rra\n");
 }
 
-void	rotate(t_stack *stack)
+void	rrb(t_stack *b)
 {
-	if (!stack || stack->size < 2)
+	if (!b)
 		return ;
-	stack->top = stack->top->next;
+	reverse_rotate(b);
+	ft_printf("rrb\n");
 }
 
-void	reverse_rotate(t_stack *stack)
+void	rrr(t_stack *a, t_stack *b)
 {
-	if (!stack || stack->size < 2)
+	if (!a || !b)
 		return ;
-	stack->top = stack->top->prev;
+	reverse_rotate(a);
+	reverse_rotate(b);
+	ft_printf("rrr\n");
 }

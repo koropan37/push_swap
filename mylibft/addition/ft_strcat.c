@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/04 19:26:15 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/27 11:37:11 by skimura          ###   ########.fr       */
+/*   Created: 2025/06/18 20:10:52 by skimura           #+#    #+#             */
+/*   Updated: 2025/06/25 21:57:10 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 256
-# endif
-# ifndef FD_MAX
-#  define FD_MAX 1024
-# endif
+char	*ft_strcat(char *dest, const char *src)
+{
+	int	i;
+	int	j;
 
-# include <stddef.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-char	*get_next_line(int fd);
-int		ft_check_nl(const char *s);
-char	*ft_strjoin_free(char *old, const char *buffer);
-
-#endif
+	i = 0;
+	j = 0;
+	if (!dest || !src)
+		return (NULL);
+	while (dest[i] != '\0')
+		i++;
+	while (src[j] != '\0')
+	{
+		dest[i] = src[j];
+		j++;
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}

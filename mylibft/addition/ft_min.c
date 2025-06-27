@@ -1,32 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_min.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/04 19:26:15 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/27 11:37:11 by skimura          ###   ########.fr       */
+/*   Created: 2025/06/03 20:22:27 by skimura           #+#    #+#             */
+/*   Updated: 2025/06/03 21:27:28 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 256
-# endif
-# ifndef FD_MAX
-#  define FD_MAX 1024
-# endif
+int	ft_min(int *tab, unsigned int len)
+{
+	unsigned int	i;
+	int				min_n;
 
-# include <stddef.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+	if (len == 0)
+		return (0);
+	i = 1;
+	min_n = tab[0];
+	while (i < len)
+	{
+		if (tab[i] < min_n)
+			min_n = tab[i];
+		i++;
+	}
+	return (min_n);
+}
 
-char	*get_next_line(int fd);
-int		ft_check_nl(const char *s);
-char	*ft_strjoin_free(char *old, const char *buffer);
+// #include <stdio.h>
 
-#endif
+// int	main(void)
+// {
+// 	int	tab[] = {5, 4, 7, 9, 10};
+
+// 	printf("%d\n", min(tab, 5));
+// 	return (0);
+// }

@@ -6,11 +6,10 @@
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 16:25:32 by skimura           #+#    #+#             */
-/*   Updated: 2025/05/26 15:57:53 by skimura          ###   ########.fr       */
+/*   Updated: 2025/06/27 15:42:56 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
 int	ft_put_c(char c)
@@ -34,4 +33,16 @@ int	ft_put_s(char *s)
 	if (bytes == -1)
 		return (-1);
 	return ((int)bytes);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
+
+	if (!s)
+		return (0);
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
 }

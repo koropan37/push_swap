@@ -1,30 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_list.c                                          :+:      :+:    :+:   */
+/*   ft_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/09 15:37:56 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/13 17:25:26 by skimura          ###   ########.fr       */
+/*   Created: 2025/06/03 20:06:26 by skimura           #+#    #+#             */
+/*   Updated: 2025/06/03 20:24:46 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(void)
+int	ft_max(int *tab, unsigned int len)
 {
-	int		values[] = {95, 7, 82, 30, 21, 22, 35, 69, 10, 77, 75, 74, 1, -10};
-	int		size;
-	t_node	*dummy;
+	unsigned int	i;
+	int				max_n;
 
-	size = sizeof(values) / sizeof(int);
-	dummy = create_dlist_from_array(values, size);
-	print_list(dummy);
-	compress_coordinates(dummy);
-	print_list(dummy);
-	restore_original_values(dummy);
-	print_list(dummy);
-	free_list(dummy);
-	return (0);
+	if (len == 0)
+		return (0);
+	i = 1;
+	max_n = tab[0];
+	while (i < len)
+	{
+		if (tab[i] > max_n)
+			max_n = tab[i];
+		i++;
+	}
+	return (max_n);
 }
+
+// #include <stdio.h>
+
+// int	main(void)
+// {
+// 	int	tab[] = {5, 4, 7, 9, 10};
+
+// 	printf("%d\n", max(tab, 5));
+// 	return (0);
+// }

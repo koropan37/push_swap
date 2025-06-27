@@ -1,45 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strspn.c                                        :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/01 18:55:11 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/01 20:01:51 by skimura          ###   ########.fr       */
+/*   Created: 2025/06/11 20:07:23 by skimura           #+#    #+#             */
+/*   Updated: 2025/06/18 20:12:15 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-size_t	ft_strspn(const char *s, const char *accept)
+char	*ft_strndup(const char *s, size_t n)
 {
-	size_t	j;
 	size_t	i;
-	int		f;
+	char	*str;
 
+	if (!s)
+		return (NULL);
 	i = 0;
-	while (s[i])
-	{
-		j = 0;
-		f = 0;
-		while (accept[j])
-		{
-			if (s[i] == accept[j])
-				f = 1;
-			j++;
-		}
-		if (f == 0)
-			return (i);
+	while (s[i] && i < n)
 		i++;
-	}
-	return (i);
+	str = malloc(i + 1);
+	if (!str)
+		return (NULL);
+	str[i] = '\0';
+	while (i--)
+		str[i] = s[i];
+	return (str);
 }
-
-// int	main(void)
-// {
-// 	const char	*s = "hello";
-// 	const char	*accept = "jfkhpell";
-
-// 	printf("%zu\n", ft_strspn(s, accept));
-// }
