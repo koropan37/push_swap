@@ -6,7 +6,7 @@
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 19:49:27 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/27 19:47:35 by skimura          ###   ########.fr       */
+/*   Updated: 2025/06/28 16:16:44 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	rotate_a_top_to_min(t_stack *a);
 void	move_min_to_b(t_stack *a, t_stack *b)
 {
 	rotate_a_top_to_min(a);
+	if (is_sorted(a))
+		return ;
 	pb(a, b);
 }
 

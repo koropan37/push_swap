@@ -6,7 +6,7 @@
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 16:13:31 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/27 19:44:22 by skimura          ###   ########.fr       */
+/*   Updated: 2025/06/29 19:18:52 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ t_node	*create_dlist_from_array(int *arr, int size)
 {
 	t_node	*dummy;
 
-	if (size <= 0)
-		return (NULL);
 	dummy = create_dummy_node();
 	if (!dummy)
 		return (NULL);

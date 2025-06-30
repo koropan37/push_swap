@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   01_main.c                                          :+:      :+:    :+:   */
+/*   cmd_r_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/22 22:17:48 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/29 21:35:51 by skimura          ###   ########.fr       */
+/*   Created: 2025/06/30 17:57:49 by skimura           #+#    #+#             */
+/*   Updated: 2025/06/30 19:13:49 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/push_swap.h"
+#include "include/checker_bonus.h"
 
-int	main(int argc, char **argv)
+void	checker_ra(t_stack *a)
 {
-	int	*arr;
-	int	size;
+	if (!a)
+		return ;
+	rotate(a);
+}
 
-	size = 0;
-	if (argc < 2)
-		return (0);
-	arr = ft_parse(argc, argv, &size);
-	if (!arr)
-	{
-		free(arr);
-		ft_printerror();
-	}
-	solve_push_swap(arr, size);
-	free(arr);
-	return (0);
+void	checker_rb(t_stack *b)
+{
+	if (!b)
+		return ;
+	rotate(b);
+}
+
+void	checker_rr(t_stack *a, t_stack *b)
+{
+	if (!a || !b)
+		return ;
+	rotate(a);
+	rotate(b);
 }

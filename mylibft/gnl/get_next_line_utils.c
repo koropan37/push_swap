@@ -6,12 +6,16 @@
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 19:26:11 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/27 11:37:13 by skimura          ###   ########.fr       */
+/*   Updated: 2025/06/30 19:03:41 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
 #include "libft.h"
+
+int		ft_check_nl(const char *s);
+char	*ft_strjoin_free(char *old, const char *buffer);
+char	*gnl_cleanup_internal(char **files);
+char	*gnl_process_file(int fd, char **files);
 
 int	ft_check_nl(const char *s)
 {
@@ -48,4 +52,40 @@ char	*ft_strjoin_free(char *old, const char *buffer)
 	new[i] = '\0';
 	free(old);
 	return (new);
+}
+
+char	*gnl_cleanup_internal(char **files)
+{
+	int	i;
+
+	i = 0;
+	while (i < FD_MAX)
+	{
+		free(files[i]);
+		files[i] = NULL;
+		i++;
+	}
+	return (NULL);
+}
+
+char	*gnl_process_file(int fd, char **files)
+{
+	char	*line;
+
+	files[fd] = ft_read_enter(fd, files[fd]);
+	if (!files[fd] || !*files[fd])
+	{
+		free(files[fd]);
+		files[fd] = NULL;
+		return (NULL);
+	}
+	line = ft_get_newline(files[fd]);
+	if (!line)
+	{
+		free(files[fd]);
+		files[fd] = NULL;
+		return (NULL);
+	}
+	files[fd] = ft_trim_newline(files[fd]);
+	return (line);
 }

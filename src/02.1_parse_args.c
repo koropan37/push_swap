@@ -6,44 +6,47 @@
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 20:26:13 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/27 21:06:56 by skimura          ###   ########.fr       */
+/*   Updated: 2025/06/30 19:11:30 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/push_swap.h"
 
-static int	count_total_block(int ac, char **av);
-static int	count_block_in_arg(const char *arg);
-static char	**alloc_block(int total);
-static void	copy_block(int ac, char **av, char **result);
+int		count_total_block(int argc, char **argv);
+int		count_block_in_arg(const char *arg);
+void	copy_block(int argc, char **argv, char **result);
+int		copy_split_arg(char *arg, char **result, int n);
 
-char	**parse_args(int ac, char **av)
+char	**parse_args(int argc, char **argv)
 {
 	int		total;
 	char	**result;
 
-	total = count_total_block(ac, av);
-	result = alloc_block(total);
-	copy_block(ac, av, result);
+	total = count_total_block(argc, argv);
+	result = malloc(sizeof(char *) * (total + 1));
+	if (!result)
+		ft_printerror();
+	result[total] = NULL;
+	copy_block(argc, argv, result);
 	return (result);
 }
 
-static int	count_total_block(int ac, char **av)
+int	count_total_block(int argc, char **argv)
 {
 	int	total;
 	int	i;
 
 	total = 0;
-	i = 0;
-	while (i < ac)
+	i = 1;
+	while (i < argc)
 	{
-		total += count_block_in_arg(av[i]);
+		total += count_block_in_arg(argv[i]);
 		i++;
 	}
 	return (total);
 }
 
-static int	count_block_in_arg(const char *arg)
+int	count_block_in_arg(const char *arg)
 {
 	char	**block;
 	int		count;
@@ -55,11 +58,16 @@ static int	count_block_in_arg(const char *arg)
 		ft_printerror();
 	block = ft_split(arg, ' ');
 	if (!block)
+		ft_printerror_and_free(block);
+	if (!block[0])
+	{
+		free_split(block);
 		ft_printerror();
+	}
 	while (block[i])
 	{
 		if (block[i][0] == '\0')
-			ft_printerror();
+			ft_printerror_and_free(block);
 		count++;
 		i++;
 	}
@@ -67,42 +75,41 @@ static int	count_block_in_arg(const char *arg)
 	return (count);
 }
 
-static char	**alloc_block(int total)
+void	copy_block(int argc, char **argv, char **result)
 {
-	char	**result;
-
-	result = malloc(sizeof(char *) * (total + 1));
-	if (!result)
-		ft_printerror();
-	result[total] = NULL;
-	return (result);
-}
-
-static void	copy_block(int ac, char **av, char **result)
-{
-	char	**copy;
-	int		n;
-	int		i;
-	int		j;
+	int	i;
+	int	n;
 
 	n = 0;
-	i = 0;
-	while (i < ac)
+	i = 1;
+	while (i < argc)
 	{
-		copy = ft_split(av[i], ' ');
-		if (!copy)
-			ft_printerror();
-		j = 0;
-		while (copy[j])
-		{
-			if (copy[j][0] == '\0')
-				ft_printerror();
-			result[n++] = ft_strdup(copy[j]);
-			if (!result[n - 1])
-				ft_printerror();
-			j++;
-		}
-		free_split(copy);
+		n = copy_split_arg(argv[i], result, n);
 		i++;
 	}
+}
+
+int	copy_split_arg(char *arg, char **result, int n)
+{
+	char	**copy;
+	int		j;
+
+	copy = ft_split(arg, ' ');
+	if (!copy)
+		free_all_and_error(result, copy, n);
+	if (!copy[0])
+		free_all_and_error(result, copy, n);
+	j = 0;
+	while (copy[j])
+	{
+		if (copy[j][0] == '\0')
+			free_all_and_error(result, copy, n);
+		result[n] = ft_strdup(copy[j]);
+		if (!result[n])
+			free_all_and_error(result, copy, n);
+		n++;
+		j++;
+	}
+	free_split(copy);
+	return (n);
 }

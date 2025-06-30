@@ -6,7 +6,7 @@
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:46:30 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/27 20:23:56 by skimura          ###   ########.fr       */
+/*   Updated: 2025/06/28 15:40:25 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,22 @@ void	solve_push_swap(int *arr, int size)
 	free_stack(a);
 }
 
+int	is_sorted(t_stack *a)
+{
+	t_node	*cur;
+
+	if (a->size <= 1)
+		return (1);
+	cur = a->top->next;
+	while (cur->next != a->top)
+	{
+		if (cur->value > cur->next->value)
+			return (0);
+		cur = cur->next;
+	}
+	return (1);
+}
+
 void	do_push_swap(t_stack *a)
 {
 	t_stack	*b;
@@ -49,22 +65,6 @@ void	do_push_swap(t_stack *a)
 	sort_stack(a, b);
 	free_list(b->top);
 	free(b);
-}
-
-int	is_sorted(t_stack *a)
-{
-	t_node	*cur;
-
-	if (a->size <= 1)
-		return (1);
-	cur = a->top->next;
-	while (cur->next != a->top)
-	{
-		if (cur->value > cur->next->value)
-			return (0);
-		cur = cur->next;
-	}
-	return (1);
 }
 
 void	sort_stack(t_stack *a, t_stack *b)

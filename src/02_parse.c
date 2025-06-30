@@ -6,35 +6,38 @@
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 17:33:02 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/27 19:34:51 by skimura          ###   ########.fr       */
+/*   Updated: 2025/06/29 19:21:16 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/push_swap.h"
 
-static void	validate_block(char **block, int *values);
-static long	ft_atol_ps(const char *s);
-static int	ft_is_int(const char *s);
-static int	ft_duplicate(int *arr, int size);
+void		validate_block(char **block, int *values);
+long		ft_atol_ps(const char *s);
+int			ft_is_int(const char *s);
+int			ft_duplicate(int *arr, int size);
 
-int	*ft_parse(int ac, char *av[], int *size)
+int	*ft_parse(int argc, char **argv, int *size)
 {
 	char	**block;
 	int		*values;
 
-	block = parse_args(ac, av);
+	block = parse_args(argc, argv);
 	*size = count_block(block);
 	values = malloc(sizeof(int) * (*size));
 	if (!values)
 		ft_printerror();
 	validate_block(block, values);
 	if (ft_duplicate(values, *size))
-		ft_printerror();
+	{
+		free(values);
+		ft_printerror_and_free(block);
+	}
 	free_split(block);
 	return (values);
 }
 
-static void	validate_block(char **block, int *values)
+void	validate_block(char **block, int *values)
 {
 	long	num;
 	int		i;
@@ -43,13 +46,34 @@ static void	validate_block(char **block, int *values)
 	while (block[i])
 	{
 		if (!ft_is_int(block[i]))
-			ft_printerror();
+		{
+			free(values);
+			ft_printerror_and_free(block);
+		}
 		num = ft_atol_ps(block[i]);
 		if (num < INT_MIN || num > INT_MAX)
-			ft_printerror();
+		{
+			free(values);
+			ft_printerror_and_free(block);
+		}
 		values[i] = (int)num;
 		i++;
 	}
+}
+
+int	ft_is_int(const char *s)
+{
+	if (*s == '-' || *s == '+')
+		s++;
+	if (*s == '\0')
+		return (0);
+	while (*s)
+	{
+		if (!ft_isdigit(*s))
+			return (0);
+		s++;
+	}
+	return (1);
 }
 
 long	ft_atol_ps(const char *s)
@@ -73,22 +97,7 @@ long	ft_atol_ps(const char *s)
 	return (res * sign);
 }
 
-static int	ft_is_int(const char *s)
-{
-	if (*s == '-' || *s == '+')
-		s++;
-	if (*s == '\0')
-		return (0);
-	while (*s)
-	{
-		if (!ft_isdigit(*s))
-			return (0);
-		s++;
-	}
-	return (1);
-}
-
-static int	ft_duplicate(int *arr, int size)
+int	ft_duplicate(int *arr, int size)
 {
 	int	i;
 	int	j;

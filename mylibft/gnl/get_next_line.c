@@ -6,14 +6,32 @@
 /*   By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 19:26:08 by skimura           #+#    #+#             */
-/*   Updated: 2025/06/27 11:37:54 by skimura          ###   ########.fr       */
+/*   Updated: 2025/06/30 19:02:50 by skimura          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
 #include "libft.h"
 
-static ssize_t	ft_read_buf(int fd, char **buffer)
+char	*get_next_line(int fd);
+ssize_t	ft_read_buf(int fd, char **buffer);
+char	*ft_read_enter(int fd, char *enter);
+char	*ft_get_newline(char *enter);
+char	*ft_trim_newline(char *enter);
+
+char	*get_next_line(int fd)
+{
+	static char	*files[FD_MAX];
+
+	if (fd == -1)
+	{
+		return (gnl_cleanup_internal(files));
+	}
+	if (fd < 0 || fd >= FD_MAX || BUFFER_SIZE <= 0)
+		return (NULL);
+	return (gnl_process_file(fd, files));
+}
+
+ssize_t	ft_read_buf(int fd, char **buffer)
 {
 	ssize_t	bytes;
 
@@ -26,7 +44,7 @@ static ssize_t	ft_read_buf(int fd, char **buffer)
 	return (bytes);
 }
 
-static char	*ft_read_enter(int fd, char *enter)
+char	*ft_read_enter(int fd, char *enter)
 {
 	ssize_t	bytes;
 	char	*buffer;
@@ -53,7 +71,7 @@ static char	*ft_read_enter(int fd, char *enter)
 	return (enter);
 }
 
-static char	*ft_get_newline(char *enter)
+char	*ft_get_newline(char *enter)
 {
 	size_t	i;
 
@@ -67,7 +85,7 @@ static char	*ft_get_newline(char *enter)
 	return (ft_substr(enter, 0, i));
 }
 
-static char	*ft_trim_newline(char *enter)
+char	*ft_trim_newline(char *enter)
 {
 	size_t	i;
 	char	*newline;
@@ -82,32 +100,31 @@ static char	*ft_trim_newline(char *enter)
 		free(enter);
 		return (NULL);
 	}
+	if (!enter[i + 1])
+	{
+		free(enter);
+		return (ft_strdup(""));
+	}
 	newline = ft_strdup(enter + i + 1);
 	free(enter);
+	if (!newline)
+		return (NULL);
 	return (newline);
 }
 
-char	*get_next_line(int fd)
-{
-	static char	*files[FD_MAX];
-	char		*line;
+// #include <stdio.h>
+// #include <stdlib.h>
 
-	if (fd < 0 || fd >= FD_MAX || BUFFER_SIZE <= 0)
-		return (NULL);
-	files[fd] = ft_read_enter(fd, files[fd]);
-	if (!files[fd] || !*files[fd])
-	{
-		free(files[fd]);
-		files[fd] = NULL;
-		return (NULL);
-	}
-	line = ft_get_newline(files[fd]);
-	if (!line)
-	{
-		free(files[fd]);
-		files[fd] = NULL;
-		return (NULL);
-	}
-	files[fd] = ft_trim_newline(files[fd]);
-	return (line);
-}
+// char *get_next_line(int fd);
+
+// int	main(void)
+// {
+// 	char *line;
+
+// 	while ((line = get_next_line(0)))
+// 	{
+// 		printf("line: %s", line);
+// 		free(line);
+// 	}
+// 	return (0);
+// }
