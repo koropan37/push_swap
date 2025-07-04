@@ -6,7 +6,7 @@
 #    By: skimura <skimura@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/02 15:34:26 by skimura           #+#    #+#              #
-#    Updated: 2025/06/30 18:05:24 by skimura          ###   ########.fr        #
+#    Updated: 2025/07/04 16:56:30 by skimura          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,7 @@ SRC 		= \
 				src/05_lis.c \
 				src/06_push_to_b.c \
 				src/07_push_to_a.c \
-				src/07.1_cost_calculate.c \
-				src/07.2_rotate_cost.c \
+				src/07.1_rotate_cost.c \
 				src/cmd_p.c \
 				src/cmd_p_helper.c \
 				src/cmd_r.c \
